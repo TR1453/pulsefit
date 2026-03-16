@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseFit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="shell auth-shell" id="authView">
+      <div class="hero-copy hero-copy--auth">
+        <p class="eyebrow">PulseFit</p>
+        <h1>Dein smarter Fitness-Tracker mit Coaching direkt in der App.</h1>
+        <p class="intro">Registriere dich, tracke Training und Kalorien und nutze den integrierten KI-Coach fuer schnelle Antworten rund um Fitness, Ernaehrung und Routine.</p>
+      </div>
+
+      <div class="auth-layout">
+        <div class="form-grid form-grid--single">
+          <section class="form-panel form-panel--register hidden" id="registerPanel">
+            <h2>Registrieren</h2>
+            <form class="login-form" id="registerForm">
+              <label for="registerFirstName">Vorname</label>
+              <input id="registerFirstName" name="firstName" type="text" placeholder="Max" required>
+
+              <label for="registerLastName">Nachname</label>
+              <input id="registerLastName" name="lastName" type="text" placeholder="Mustermann" required>
+
+              <label for="registerAge">Alter</label>
+              <input id="registerAge" name="age" type="number" min="12" max="100" placeholder="18" required>
+
+              <label for="registerHeight">Groesse in cm</label>
+              <input id="registerHeight" name="height" type="number" min="100" max="250" placeholder="178" required>
+
+              <label for="registerEmail">E-Mail</label>
+              <input id="registerEmail" name="email" type="email" placeholder="name@beispiel.de" required>
+
+              <label for="registerPassword">Passwort</label>
+              <input id="registerPassword" name="password" type="password" placeholder="Passwort erstellen" required>
+              <p class="field-hint">Mindestens 8 Zeichen mit Grossbuchstaben, Kleinbuchstaben und Zahl.</p>
+
+              <button type="submit">Konto erstellen</button>
+              <p class="message" id="registerMessage" aria-live="polite"></p>
+            </form>
+            <button type="button" class="secondary-button toggle-auth-button" id="showLoginButton">Zurueck zum Login</button>
+          </section>
+
+          <section class="form-panel" id="loginPanel">
+            <h2>Anmelden</h2>
+            <form class="login-form" id="loginForm">
+              <label for="loginEmail">E-Mail</label>
+              <input id="loginEmail" name="email" type="email" placeholder="name@beispiel.de" required>
+
+              <label for="loginPassword">Passwort</label>
+              <input id="loginPassword" name="password" type="password" placeholder="Passwort eingeben" required>
+
+              <button type="submit">Einloggen</button>
+              <p class="message" id="loginMessage" aria-live="polite"></p>
+            </form>
+            <button type="button" class="secondary-button toggle-auth-button" id="showRegisterButton">Noch kein Konto? Registrieren</button>
+          </section>
+        </div>
+
+        <aside class="auth-aside">
+          <div class="feature-card">
+            <span class="feature-badge">Live Coach</span>
+            <h3>Schnelle Fitness-Hilfe</h3>
+            <p>Frage direkt nach Trainingsplan, Kalorien, Muskelaufbau, Abnehmen oder Regeneration.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-badge">Tracking</span>
+            <h3>Alles an einem Ort</h3>
+            <p>Workouts, Mahlzeiten und Tagesziel werden in einer klaren App-Oberflaeche gespeichert.</p>
+          </div>
+        </aside>
+      </div>
+
+      <p class="site-credit">Powered by Emir</p>
+    </section>
+
+    <section class="shell dashboard-shell hidden" id="dashboardView">
+      <div class="dashboard-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Dashboard</p>
+          <h1>Trainiere fokussiert. Iss bewusst. Frag deine KI.</h1>
+          <p class="intro" id="welcomeText">Willkommen.</p>
+        </div>
+        <div class="hero-actions">
+          <div class="hero-pill hero-pill--compact">
+            <span>Modus</span>
+            <strong>Focus Day</strong>
+          </div>
+          <button type="button" class="settings-button" id="openSettingsButton">Einstellungen</button>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card stat-card--accent">
+          <span>Workouts</span>
+          <strong id="workoutCount">0</strong>
+          <p>eingetragene Sessions</p>
+        </article>
+        <article class="stat-card stat-card--dark">
+          <span>Kalorien heute</span>
+          <strong id="calorieTotal">0</strong>
+          <p>gesamte Aufnahme</p>
+        </article>
+        <article class="stat-card stat-card--success">
+          <span>Gewichtsziel</span>
+          <strong id="goalStatus">-</strong>
+          <p>noch bis zum Ziel</p>
+        </article>
+      </div>
+
+      <section class="boss-banner hidden" id="bossBanner">
+        <div>
+          <p class="eyebrow">Chef Modus</p>
+          <h2>Hallo Chef</h2>
+          <p class="intro boss-banner__text" id="bossText">Willkommen im erweiterten Bereich.</p>
+        </div>
+        <div class="boss-badge">Admin Access</div>
+      </section>
+
+      <section class="boss-panel hidden" id="bossPanel">
+        <div class="panel-header">
+          <h2>Chef Uebersicht</h2>
+          <p>Besondere Informationen und Schnellzugriff nur fuer dein Konto.</p>
+        </div>
+        <div class="boss-grid">
+          <article class="boss-card">
+            <span>Rolle</span>
+            <strong>Chef</strong>
+            <p>Dieses Konto hat eine besondere Oberflaeche.</p>
+          </article>
+          <article class="boss-card">
+            <span>Benutzer</span>
+            <strong id="bossUserEmail">-</strong>
+            <p>Aktuell angemeldetes Chef-Konto.</p>
+          </article>
+          <article class="boss-card">
+            <span>Security Logs</span>
+            <strong id="bossLogStatus">Aktiv</strong>
+            <p>Login- und Registrierungsversuche koennen serverseitig protokolliert werden.</p>
+          </article>
+        </div>
+      </section>
+
+      <div class="dashboard-main">
+        <div class="dashboard-content">
+          <div class="dashboard-grid">
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Workout eintragen</h2>
+                <p>Speichere Einheit, Dauer und kurze Trainingsnotiz.</p>
+              </div>
+              <form class="login-form" id="workoutForm">
+                <label for="workoutName">Workout</label>
+                <input id="workoutName" name="name" type="text" placeholder="z. B. Pull Day" required>
+
+                <label for="workoutDuration">Dauer in Minuten</label>
+                <input id="workoutDuration" name="duration" type="number" min="1" placeholder="60" required>
+
+                <label for="workoutNotes">Notizen</label>
+                <input id="workoutNotes" name="notes" type="text" placeholder="z. B. Klimmzuege, Rudern, Bizeps">
+
+                <button type="submit">Workout speichern</button>
+                <p class="message" id="workoutMessage" aria-live="polite"></p>
+              </form>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Kalorien tracken</h2>
+                <p>Fuege Mahlzeit, Kalorien und optional dein Tagesziel hinzu.</p>
+              </div>
+              <form class="login-form" id="calorieForm">
+                <label for="mealName">Mahlzeit</label>
+                <input id="mealName" name="meal" type="text" placeholder="z. B. Reis mit Huhn" required>
+
+                <label for="mealCalories">Kalorien</label>
+                <input id="mealCalories" name="calories" type="number" min="1" placeholder="780" required>
+
+                <label for="calorieGoal">Tagesziel</label>
+                <input id="calorieGoal" name="goal" type="number" min="1" placeholder="2500">
+
+                <button type="submit">Kalorien speichern</button>
+                <p class="message" id="calorieMessage" aria-live="polite"></p>
+              </form>
+            </section>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Deine Workouts</h2>
+                <p>Letzte Einheiten fuer einen schnellen Ueberblick. Einzelne Eintraege kannst du direkt loeschen.</p>
+              </div>
+              <ul class="entries fitness-list" id="workoutList"></ul>
+            </section>
+
+            <section class="panel">
+              <div class="panel-header">
+                <h2>Deine Mahlzeiten</h2>
+                <p>Heute getrackte Kalorien und Ziele. Einzelne Eintraege kannst du direkt loeschen.</p>
+              </div>
+              <ul class="entries fitness-list" id="mealList"></ul>
+            </section>
+          </div>
+        </div>
+
+        <aside class="coach-panel">
+          <div class="coach-header">
+            <div>
+              <p class="eyebrow">KI Coach</p>
+              <h2>Frag mich alles ueber Fitness</h2>
+            </div>
+            <span class="coach-status">online</span>
+          </div>
+
+          <div class="coach-chat" id="coachChat">
+            <article class="chat-bubble chat-bubble--assistant">
+              Hallo, ich bin dein Fitness-Coach. Frag mich zum Beispiel nach Muskelaufbau, Abnehmen, Eiweiss, Trainingsplan oder Regeneration.
+            </article>
+          </div>
+
+          <form class="coach-form" id="coachForm">
+            <label class="sr-only" for="coachQuestion">Frage an den KI Coach</label>
+            <input id="coachQuestion" name="question" type="text" placeholder="z. B. Wie viel Eiweiss brauche ich fuer Muskelaufbau?" required>
+            <button type="submit">Fragen</button>
+          </form>
+        </aside>
+      </div>
+
+      <p class="site-credit">Powered by Emir</p>
+    </section>
+  </main>
+
+  <div class="settings-overlay hidden" id="settingsOverlay"></div>
+  <aside class="settings-drawer hidden" id="settingsDrawer" aria-hidden="true">
+    <div class="settings-drawer__header">
+      <div>
+        <p class="eyebrow">Konto</p>
+        <h2>Einstellungen</h2>
+        <p class="intro">Hier kannst du dein Profil, dein Passwort und das Theme der Website verwalten.</p>
+      </div>
+      <button type="button" class="secondary-button settings-close" id="closeSettingsButton">Schliessen</button>
+    </div>
+
+    <div class="settings-meta">
+      <article class="settings-chip">
+        <span>E-Mail</span>
+        <strong id="settingsEmail">-</strong>
+      </article>
+      <article class="settings-chip">
+        <span>Rolle</span>
+        <strong id="settingsRole">Mitglied</strong>
+      </article>
+    </div>
+
+    <div class="settings-stack">
+      <section class="panel profile-panel settings-panel">
+        <div class="panel-header">
+          <h2>Kontodaten</h2>
+          <p>Bearbeite deine persoenlichen Daten, dein Gewichtsziel und den Fokus direkt im Seitenfenster.</p>
+        </div>
+        <form class="login-form profile-form" id="profileForm">
+          <div class="profile-grid">
+            <div>
+              <label for="profileFirstName">Vorname</label>
+              <input id="profileFirstName" name="firstName" type="text" placeholder="Max">
+            </div>
+            <div>
+              <label for="profileLastName">Nachname</label>
+              <input id="profileLastName" name="lastName" type="text" placeholder="Mustermann">
+            </div>
+            <div>
+              <label for="profileAge">Alter</label>
+              <input id="profileAge" name="age" type="number" min="12" max="100" placeholder="18">
+            </div>
+            <div>
+              <label for="profileHeight">Groesse in cm</label>
+              <input id="profileHeight" name="height" type="number" min="100" max="250" placeholder="178">
+            </div>
+            <div>
+              <label for="profileWeight">Aktuelles Gewicht in kg</label>
+              <input id="profileWeight" name="currentWeight" type="number" min="1" step="0.1" placeholder="82.5">
+            </div>
+            <div>
+              <label for="profileTargetWeight">Zielgewicht in kg</label>
+              <input id="profileTargetWeight" name="targetWeight" type="number" min="1" step="0.1" placeholder="75.0">
+            </div>
+            <div>
+              <label for="profileCalories">Kalorienziel pro Tag</label>
+              <input id="profileCalories" name="dailyCalorieGoal" type="number" min="1" placeholder="2500">
+            </div>
+            <div class="profile-grid__wide">
+              <label for="profileGoal">Fokus</label>
+              <input id="profileGoal" name="focus" type="text" placeholder="z. B. Fettabbau, Muskelaufbau">
+            </div>
+            <div class="profile-grid__wide">
+              <label for="themeSelect">Theme</label>
+              <select id="themeSelect" name="themeSelect">
+                <option value="ember">Ember Glow</option>
+                <option value="ocean">Ocean Flow</option>
+                <option value="forest">Forest Pulse</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">Kontodaten speichern</button>
+          <p class="message" id="profileMessage" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel settings-panel">
+        <div class="panel-header">
+          <h2>Passwort aendern</h2>
+          <p>Lege ein neues Passwort fest. Nutze mindestens 8 Zeichen mit Grossbuchstaben, Kleinbuchstaben und Zahl.</p>
+        </div>
+        <form class="login-form" id="passwordForm">
+          <label for="newPassword">Neues Passwort</label>
+          <input id="newPassword" name="newPassword" type="password" placeholder="Neues Passwort">
+
+          <label for="confirmPassword">Passwort wiederholen</label>
+          <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Passwort wiederholen">
+
+          <button type="submit">Passwort aktualisieren</button>
+          <p class="message" id="passwordMessage" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="panel settings-panel settings-panel--danger">
+        <div class="panel-header">
+          <h2>Sitzung</h2>
+          <p>Wenn du fertig bist, kannst du dich hier sicher ausloggen.</p>
+        </div>
+        <button type="button" class="secondary-button logout-button logout-button--drawer" id="logoutButton">Ausloggen</button>
+      </section>
+    </div>
+  </aside>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
